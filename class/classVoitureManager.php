@@ -16,12 +16,9 @@ class VoitureManager
 
     public function getVoitures(?int $id = NULL) : string|array
     {
-        $sql = "
-            SELECT * FROM tblvoiture AS v
-            LEFT JOIN tblmarque AS m ON v.idMarque = m.idMarque
-            LEFT JOIN tblcategorie AS c ON v.idCategorie = c.idCategorie
-        ";
-
+        $sql = (string) "SELECT * FROM tblvoiture AS v
+                         LEFT JOIN tblmarque AS m ON v.idMarque = m.idMarque
+                         LEFT JOIN tblcategorie AS c ON v.idCategorie = c.idCategorie";
 
         if (!$id) {
             $stmt = $this->pdo->prepare($sql);
@@ -31,11 +28,10 @@ class VoitureManager
             $listVoitures = (string) "";
             foreach ($voitures as $voiture) {
                 $listVoitures .= "
-                    <li><a href='./voitures.php?idVoiture={$voiture['idVoiture']}'>{$voiture['marque']} {$voiture['modele']}</a></li>
-                ";
+                    <li><a href='./voitures.php?idVoiture={$voiture['idVoiture']}'>{$voiture['marque']} {$voiture['modele']}</a></li>";
             }
 
-            return $listVoitures;
+            return (string) $listVoitures;
         } else {
             $sql .= "WHERE idVoiture = :idVoiture";
             $stmt = $this->pdo->prepare($sql);
@@ -43,7 +39,7 @@ class VoitureManager
             $stmt->execute();
             $voiture = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            return $voiture;
+            return (array) $voiture;
         }
     }
 }
