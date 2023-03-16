@@ -37,6 +37,15 @@ class ClientManager
 
             $idPays = $stmt->fetchColumn();
 
+            if (!$idPays) {
+                $sql = "INSERT INTO tblpays (pays) VALUES (:pays)";
+                $stmt = $this->pdo->prepare($sql);
+                $stmt->bindValue(":pays", $client->get_pays());
+                $stmt->execute();
+
+                $idPays = $this->pdo->lastInsertId();
+            }
+
             // INSERT tbladresse
             $sql = (string) "INSERT INTO tbladresse (noPorte, rue, ville, province, codePostal, idPays)
             VALUES (:noPorte, :rue, :ville, :province, :codePostal, :idPays)";
@@ -119,7 +128,7 @@ class ClientManager
                 ":dateExp" => $client->get_dateExpiration(),
                 ":infolettre" => $client->get_promotions(),
                 ":modalite" => $client->get_modalites(),
-                ":dateCreation" => date('Y-m-d H:i:s')
+                ":dateCreation" => date('Y-m-d')
             ];
 
             foreach ($data as $key => $value) {
