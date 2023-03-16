@@ -144,7 +144,25 @@ class ClientManager
         } catch (PDOException $error) {
             $this->pdo->rollback();
             throw $error;
-            // return false;
+        }
+    }
+
+    public function loginExists(string $email, string $pass) : bool
+    {
+        $sql = (string) "SELECT (idClient, courriel, mdp, prenom, nom) FROM tblclient WHERE courriel = :courriel";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(":courriel", $email);
+        $stmt->execute();
+
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (password_verify($pass, $user["mdp"])) {
+            $_SESSION["id"] = $user["idClient"];
+            $_SESSION["prenom"] = $user["prenom"];
+            $_SESSION["nom"] = $user["nom"];
+            return true;
+        } else {
+            return false;
         }
     }
 }
