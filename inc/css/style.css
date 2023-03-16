@@ -1,0 +1,494 @@
+@charset "UTF-8";
+
+
+/***************************************/
+/* Mise en forme de la page en général */
+/***************************************/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: #000;
+  font-family: Calibri, 'Trebuchet MS', sans-serif;
+}
+
+body {
+  background-color: #EDEDED;
+}
+
+main {
+  margin: auto;
+  padding-bottom: 60px;
+  width: 980px;
+  min-height: 90vh;
+  background-color: #FFF;
+}
+
+img {
+  max-width: 100%;
+}
+
+h1, h2, h3 {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.erreur {
+  color: #f00;
+  font-weight: bold;
+  text-align: center;
+}
+
+.flexible {
+  display: flex;
+}
+
+.grille {
+  display: grid;
+  align-items: center;
+  row-gap: 10px;
+}
+
+button[type=submit] {
+  align-self: stretch;
+  background-color: #4C6C84;
+  color: #FFF; 
+}
+
+
+/*****************************/
+/* Mise en forme de l'entête */
+/*****************************/
+header {
+  text-align: center;
+}
+
+header > div {
+  justify-content: flex-end;
+}
+
+header a, a.suppression {
+  display: block;
+  padding: 20px;
+  text-decoration: none;
+  text-align: center;
+}
+
+
+/*********************************************************************/
+/* Mise en forme du menu de navigation et des boutons de suppression */
+/*********************************************************************/
+nav ul {
+  margin-bottom: 10px;
+  list-style-type: none;
+}
+
+nav li, a.suppression {
+  width: 25%;
+}
+
+a.suppression {
+  margin: 0 37.5%;
+}
+
+nav a, a.suppression {
+  border: 1px solid #000;
+  background-color: #4C6C84;
+  color: #FFF;
+  transition: 1s background-color;
+}
+
+nav a:hover, a.suppression:hover {
+  background-color: #95474C;
+}
+
+
+/*******************************************************/
+/* Mise en forme du formulaire de création d'un compte */
+/*******************************************************/
+.inscription {
+  margin: 0 11%;
+  width: 78%;
+  flex-direction: column;
+  justify-content: stretch;
+}
+
+.inscription fieldset {
+  margin-top: 10px;
+  padding: 10px 20px 20px 20px;
+  background-color: #EDEDED;
+}
+
+.inscription fieldset > div {
+  grid-template-columns: repeat(14, 1fr);
+}
+
+.inscription fieldset:first-of-type > div {
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-areas: "label_prenom label_prenom input_prenom input_prenom input_prenom input_prenom input_prenom label_nom label_nom input_nom input_nom input_nom input_nom input_nom"
+                       "label_courriel label_courriel input_courriel input_courriel input_courriel input_courriel input_courriel label_mot_passe label_mot_passe label_mot_passe input_mot_passe input_mot_passe input_mot_passe input_mot_passe";
+}
+
+label[for=prenom] {
+  grid-area: label_prenom;
+}
+
+label[for=nom] {
+  grid-area: label_nom;
+  padding-left: 20px;
+}
+
+label[for=courriel] {
+  grid-area: label_courriel;
+}
+
+label[for=motPasse] {
+  grid-area: label_mot_passe;
+  padding-left: 20px;
+}
+
+#prenom {
+  grid-area: input_prenom;
+}
+
+#nom {
+  grid-area: input_nom;
+}
+
+#courriel {
+  grid-area: input_courriel;
+}
+
+#motPasse {
+  grid-area: input_mot_passe;
+}
+
+.inscription fieldset:nth-of-type(2) > div {
+  grid-template-rows: repeat(5, 1fr);
+  grid-template-areas: "label_pays label_pays input_pays input_pays input_pays input_pays input_pays . . . . . . ."
+                       "label_adresse label_adresse input_adresse input_adresse input_adresse input_adresse input_adresse input_adresse input_adresse input_adresse input_adresse input_adresse input_adresse input_adresse"
+
+                       "label_ville label_ville input_ville input_ville input_ville input_ville input_ville label_province label_province input_province input_province input_province input_province input_province"
+
+                       "label_code_postal label_code_postal input_code_postal input_code_postal input_code_postal input_code_postal input_code_postal . . . . . . ."
+
+                       "label_type_telephone label_type_telephone input_type_telephone input_type_telephone input_type_telephone input_type_telephone input_type_telephone label_telephone label_telephone input_telephone input_telephone input_telephone input_telephone input_telephone";
+}
+
+label[for=pays] {
+  grid-area: label_pays;
+}
+
+label[for=adresse] {
+  grid-area: label_adresse;
+}
+
+label[for=ville] {
+  grid-area: label_ville;
+}
+
+label[for=province] {
+  grid-area: label_province;
+  padding-left: 20px;
+}
+
+label[for=codePostal] {
+  grid-area: label_code_postal;
+}
+
+label[for=typeTelephone] {
+  grid-area: label_type_telephone;
+}
+
+label[for=telephone] {
+  grid-area: label_telephone;
+  padding-left: 20px;
+}
+
+#pays {
+  grid-area: input_pays;
+}
+
+#adresse {
+  grid-area: input_adresse;
+}
+
+#ville {
+  grid-area: input_ville;
+}
+
+#province {
+  grid-area: input_province;
+}
+
+#codePostal {
+  grid-area: input_code_postal;
+}
+
+#typeTelephone {
+  grid-area: input_type_telephone;
+}
+
+#telephone {
+  grid-area: input_telephone;
+}
+
+.inscription fieldset:nth-of-type(3) > div {
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-areas: "label_delivrance label_delivrance label_delivrance input_delivrance input_delivrance input_delivrance input_delivrance label_naissance label_naissance label_naissance input_naissance input_naissance input_naissance input_naissance input_naissance"
+                       "label_permis label_permis label_permis input_permis input_permis input_permis input_permis label_expiration label_expiration label_expiration input_expiration input_expiration input_expiration input_expiration input_expiration";
+}
+
+label[for=paysDelivrance] {
+  grid-area: label_delivrance;
+}
+
+label[for=dateNaissance] {
+  grid-area: label_naissance;
+  padding-left: 20px;
+}
+
+label[for=permis] {
+  grid-area: label_permis;
+}
+
+label[for=dateExpiration] {
+  grid-area: label_expiration;
+  padding-left: 20px;
+}
+
+#paysDelivrance {
+  grid-area: input_delivrance;
+}
+
+#dateNaissance {
+  grid-area: input_naissance;
+}
+
+#permis {
+  grid-area: input_permis;
+}
+
+#dateExpiration {
+  grid-area: input_expiration;
+}
+
+.inscription fieldset:last-of-type > div {
+  grid-template-rows: repeat(2, 1fr) 2fr;
+  grid-template-columns: 1fr repeat(6, 6fr);
+  grid-template-areas: "input_promotions label_promotions label_promotions label_promotions . . ."
+
+                       "input_modalites label_modalites label_modalites . . . ."
+
+                       ". . . . . . button_submit1";
+}
+
+#promotions {
+  grid-area: input_promotions;
+}
+
+#modalites {
+  grid-area: input_modalites;
+}
+
+label[for=promotions] {
+  grid-area: label_promotions;
+}
+
+label[for=modalites] {
+  grid-area: label_modalites;
+}
+
+.inscription button[type=submit] {
+  grid-area: button_submit1;
+}
+
+
+/****************************************************/
+/* Mise en forme du formulaire de connexion (login) */
+/****************************************************/
+.connexion {
+  margin: 30px 20%;
+  width: 60%;
+}
+
+form.connexion {
+  padding: 30px 10%;
+  border: 1px solid #000;
+  grid-template-rows: repeat(2, 1fr) 2fr;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-areas: "label_utilisateur label_utilisateur input_utilisateur input_utilisateur input_utilisateur input_utilisateur"
+
+                       "label_connect_pass label_connect_pass input_connect_pass input_connect_pass input_connect_pass input_connect_pass"
+
+                       "button_submit2 button_submit2 button_submit2 button_submit2 button_submit2 button_submit2";
+}
+
+label[for=user_email] {
+  grid-area: label_utilisateur;
+}
+
+label[for=connect_pass] {
+  grid-area: label_connect_pass;
+}
+
+#user_email {
+  grid-area: input_utilisateur;
+}
+
+#connect_pass {
+  grid-area: input_connect_pass;
+}
+
+.connexion button[type=submit] {
+  grid-area: button_submit2;
+}
+
+
+/*********************************************************/
+/* Mise en forme du formulaire pour réserver une voiture */
+/*********************************************************/
+.location {
+  margin: 40px 10% 0 10%;
+  width: 80%;
+}
+
+.location > div:first-of-type {
+  grid-template-rows: repeat(2, auto);
+  grid-template-columns: 1fr 2fr 1fr 2fr;
+  grid-template-areas: "label_debut_location input_debut_location label_fin_location input_fin_location"
+
+                       "form_div form_div form_div form_div";
+}
+
+label[for=dateDebut] {
+  grid-area: label_debut_location;
+}
+
+label[for=dateFin] {
+  grid-area: label_fin_location;
+  text-align: center;
+}
+
+#dateDebut {
+  grid-area: input_debut_location;
+}
+
+#dateFin {
+  grid-area: input_fin_location;
+}
+
+.location > div:first-of-type > div {
+  grid-area: form_div;
+  margin-bottom: 10px;
+}
+
+.location > div.flexible {
+  flex-flow: row wrap;
+}
+
+.location > div.flexible > div.grille {
+  width: 50%;
+  margin-bottom: 10px;
+  grid-template-rows: auto;
+  grid-template-columns: 1fr 10fr;
+  grid-template-areas: "input_voiture label_voiture";
+}
+
+.location > div.flexible > div.grille > input {
+  grid-area: input_voiture;
+}
+
+.location > div.flexible > div.grille > label.flexible {
+  grid-area: label_voiture;
+  align-items: center;
+  justify-content: space-between;
+}
+
+div.grille > label.flexible > img {
+  width: 55%;
+}
+
+div.grille > label.flexible > strong {
+  width: 40%; /* On laisse volontairement un jeu pour que la propriété "justify-content: space-between" s'applique. */
+}
+
+.location button[type=submit] {
+  margin: 10px 0 0 84%;
+  width: 16%;
+  padding: 8px 0;
+}
+
+
+/**********************************************************/
+/* Mise en forme des listes générées par "traitement.php" */
+/**********************************************************/
+main > ul, main > ul + img {
+  margin: 10px 30%;
+  width: 40%;
+}
+
+main > ul > li {
+  margin-top: 20px;
+}
+
+main > ul > li > ul, main > ul > li > ul > li > ul {
+  padding-left: 30px;
+}
+
+
+/********************************************************************/
+/* Mise en forme de la liste de voitures générée par "voitures.php" */
+/********************************************************************/
+.car_list {
+  list-style-type: none;
+  text-align: center;
+}
+
+
+/**************************************************************************************/
+/* Mise en forme de l'article affichant les détails d'une voiture dans "voitures.php" */
+/**************************************************************************************/
+main > article.grille {
+  margin: 0 5%;
+  width: 90%;
+  grid-template-rows: 25% 15% 60%;
+  grid-template-columns: 1fr 1.5fr;
+  grid-template-areas: "car_title car_title"
+                       "car_img car_pass"
+                       "car_img car_desc";
+  gap: 0 20px;
+  justify-items: flex-start;
+  align-items: flex-start;
+}
+
+main > article.grille > h2 {
+  grid-area: car_title;
+}
+
+main > article.grille > img {
+  grid-area: car_img;
+}
+
+main > article.grille > p:first-of-type {
+  grid-area: car_pass;
+}
+
+main > article.grille > p:last-of-type {
+  grid-area: car_desc;
+  text-align: justify;
+}
+
+p.retour {
+  margin-right: 5%;
+  text-align: right;
+}
+
+
+/*********************************/
+/* Mise en forme du pied de page */
+/*********************************/
+footer {
+  padding: 20px 0;
+  text-align: center;
+}

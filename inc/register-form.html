@@ -1,0 +1,89 @@
+<form action="traitement.php" method="post" class="flexible inscription">
+    <fieldset>
+        <legend><strong>Mon profil</strong></legend>
+
+        <div class="grille">
+            <label for="prenom">Prénom :</label>
+            <input type="text" name="prenom" id="prenom" required />
+
+            <label for="nom">Nom :</label>
+            <input type="text" name="nom" id="nom" required />
+
+            <label for="courriel">Courriel :</label>
+            <input type="email" name="courriel" id="courriel" required />
+
+            <label for="motPasse">Mot de passe :</label>
+            <input type="password" name="motPasse" id="motPasse" required />
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend><strong>Coordonnées</strong></legend>
+
+        <div class="grille">
+            <label for="pays">Pays :</label>
+            <input type="text" name="pays" id="pays" required />
+
+            <label for="adresse">Adresse :</label>
+            <input type="text" name="adresse" id="adresse" required />
+
+            <label for="ville">Ville :</label>
+            <input type="text" name="ville" id="ville" required />
+
+            <label for="province">Province :</label>
+            <input type="text" name="province" id="province" required />
+
+            <label for="codePostal">Code postal :</label>
+            <input type="text" name="codePostal" id="codePostal" required />
+
+            <label for="typeTelephone">Type :</label>
+            <select name="typeTelephone" id="typeTelephone">
+                <option value="maison" selected>Maison</option>
+                <option value="bureau">Bureau</option>
+                <option value="mobile">Mobile</option>
+                <option value="autre">Autre</option>
+            </select>
+
+            <label for="telephone">Téléphone :</label>
+            <input type="tel" name="telephone" id="telephone" required />
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend><strong>Informations sur le conducteur</strong></legend>
+
+        <div class="grille">
+            <label for="paysDelivrance">Pays de délivrance :</label>
+            <select name="paysDelivrance" id="paysDelivrance">
+                <option value="canada" selected>Canada</option>
+                <option value="usa">États-Unis</option>
+                <option value="france">France</option>
+            </select>
+
+            <label for="dateNaissance">Date de naissance :</label>
+            <input type="date" name="dateNaissance" id="dateNaissance" required />
+
+            <label for="permis">Numéro de permis :</label>
+            <input type="text" name="permis" id="permis" required />
+
+            <label for="dateExpiration">Date d'expiration :</label>
+            <input type="date" name="dateExpiration" id="dateExpiration" />
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend><strong>Préférences</strong></legend>
+
+        <div class="grille">
+            <input type="checkbox" name="promotions" id="promotions" value="Oui" />
+            <label for="promotions">Je souhaite recevoir les promotions par courriel.</label>
+
+            <input type="checkbox" name="modalites" id="modalites" value="Oui" required />
+            <label for="modalites">J'ai lu et j'accepte les modalités.</label>
+
+            <button type="submit">Créer le compte</button>
+        </div>
+    </fieldset>
+
+    <input type="hidden" name="action" value="inscription" />
+</form>
