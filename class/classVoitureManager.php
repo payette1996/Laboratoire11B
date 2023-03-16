@@ -8,6 +8,7 @@ class VoitureManager
         if (!$pdo) {
             $dsn = (string) "mysql:host=127.0.0.1;dbname=dblocation";
             $this->pdo = new PDO($dsn, "root", "");
+            $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         }
         else {
             $this->pdo = $pdo;

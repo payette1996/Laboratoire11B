@@ -2,35 +2,36 @@
     if (session_status() === PHP_SESSION_NONE)
         session_start();
 
-    require_once './class/classInscription.php';
-    require_once './class/classClient.php';
+    require_once './class/classClientManager.php';
     require_once './inc/car-info.php';
 
     // Si le formulaire provient de la page "Inscription"
     if (isset($_POST['action']) && $_POST['action'] === 'inscription') {
         require_once './inc/header.php';
 
-        $inscriptionObj = new Inscription($_POST);
+        $newClient = new Client($_POST);
+        $clientManager = new ClientManager();
+        $clientManager->addClient($newClient);
 
         echo '<h1>Informations reçues !</h1>';
-        $inscriptionObj->print_inscription_info();
+        $newClient->print_inscription_info();
 
         if (isset($_SESSION['acces'])) {
             $accesArray = unserialize($_SESSION['acces']);
 
-            if (in_array($inscriptionObj->get_courriel(), $accesArray['courriel']))
+            if (in_array($newClient->get_courriel(), $accesArray['courriel']))
                 echo '<p class="erreur">L\'inscription a échoué, car un utilisateur avec un courriel identique est déjà enregistré.</p>';
             
             else {
-                array_push($accesArray['courriel'], $inscriptionObj->get_courriel());
-                array_push($accesArray['mot_passe'], $inscriptionObj->get_motPasse());
+                array_push($accesArray['courriel'], $newClient->get_courriel());
+                array_push($accesArray['mot_passe'], $newClient->get_motPasse());
                 $_SESSION['acces'] = serialize($accesArray);
             }
         }
         
         else {
-            $_SESSION['acces'] = serialize(array('courriel'  => array($inscriptionObj->get_courriel()),
-                                                 'mot_passe' => array($inscriptionObj->get_motPasse())));
+            $_SESSION['acces'] = serialize(array('courriel'  => array($newClient->get_courriel()),
+                                                 'mot_passe' => array($newClient->get_motPasse())));
         }
     }
 
