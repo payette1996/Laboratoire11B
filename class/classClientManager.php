@@ -149,7 +149,7 @@ class ClientManager
 
     public function loginExists(string $email, string $pass) : bool
     {
-        $sql = (string) "SELECT (idClient, courriel, mdp, prenom, nom) FROM tblclient WHERE courriel = :courriel";
+        $sql = (string) "SELECT idClient, courriel, mdp, prenom, nom FROM tblclient WHERE courriel = :courriel";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(":courriel", $email);
         $stmt->execute();

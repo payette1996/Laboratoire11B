@@ -5,12 +5,13 @@
     require_once './class/classClientManager.php';
     require_once './inc/car-info.php';
 
+    $clientManager = new ClientManager();
+
     // Si le formulaire provient de la page "Inscription"
     if (isset($_POST['action']) && $_POST['action'] === 'inscription') {
         require_once './inc/header.php';
 
         $newClient = new Client($_POST);
-        $clientManager = new ClientManager();
         $clientManager->addClient($newClient);
 
         echo '<h1>Informations reçues !</h1>';
@@ -37,19 +38,17 @@
 
     // Si le formulaire provient de la page "Se connecter"
     else if (isset($_POST['action']) && $_POST['action'] === 'connexion') {
-        $accesArray = unserialize($_SESSION['acces']);
         $accesEstValide = false;
 
-        for ($i = 0; $i < count($accesArray['courriel']); $i++) {
-            if (($accesArray['courriel'][$i] === $_POST['user_email']) &&
-                (password_verify($_POST['connect_pass'], $accesArray['mot_passe'][$i]))) {
-                    $accesEstValide = true;
-                    break;
-                }
+        if ($clientManager->loginExists($_POST['user_email'], $_POST['connect_pass'])) {
+            $accesEstValide = true;
+        } else {
+            header('refresh: 0; url = login.php?erreur=1');
+            exit;
         }
         
         if ($accesEstValide) {
-            $clientObj = new Client($_POST['user_email']);
+            $clientObj = new Client(["courriel" => $_POST['user_email']]);
             $_SESSION['utilisateur'] = serialize($clientObj);
             
             require_once './inc/header.php';
