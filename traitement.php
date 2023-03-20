@@ -48,12 +48,9 @@
         }
         
         if ($accesEstValide) {
-            $clientObj = new Client(["courriel" => $_POST['user_email']]);
-            $_SESSION['utilisateur'] = serialize($clientObj);
-            
             require_once './inc/header.php';
             echo '<h1>Informations reçues !</h1>
-                  <h2>Bienvenue ' . $clientObj->get_courriel() . '</h2>';
+                  <h2>Bienvenue ' . $_SESSION["prenom"] . '</h2>';
         }
 
         else {
